@@ -139,7 +139,6 @@ Kook中暂时只支持纯文本以及部分emoji表情的解析/收发
   "secretKey": "<your secret key here>",
   "lang": "zh_cn",
   "wsAddress": "ws://127.0.0.1:8081/ws",
-  "httpAddress": "http://127.0.0.1:8083",
   "accessToken": "1145141919810",
   "messageHandler": "OneBot",
   "groupId": [
@@ -198,20 +197,20 @@ Kook中暂时只支持纯文本以及部分emoji表情的解析/收发
   "memesReply": true,
   "commandPrefixes": [
     "!!",
-    "！！"
-  ],
-  "removeUnicodeChars": true
+    "！！",
+    "/"
+  ]
 }
 ```
 
 </details>
 
 > 其中secretKey是你购买的时候我发方法给你的密钥, 请不要将密钥共享给他人, 因为你共享给别人用你自己就会被挤下线  
-> wsAddress是Lagrange的ws服务器地址, httpAddress是Lagrange的Http服务器地址
+> wsAddress是Lagrange的ws服务器地址,
 
 > lang是多语言, 可用的值见 [多语言支持](#多语言支持)
 
-> accessToken是访问密钥, 在Lagrange中可以设置, 你必须将Ws和http的accessToken设置为相同的值
+> accessToken是访问密钥, 在Lagrange中可以设置
 > 如果你使用了Kook或者Discord你需要注册一个App, Kook注册应用可以点[这里](https://developer.kookapp.cn/app/index)
 > 快速注册
 
