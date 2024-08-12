@@ -206,7 +206,7 @@ Kook中暂时只支持纯文本以及部分emoji表情的解析/收发
 </details>
 
 > 其中secretKey是你购买的时候我发方法给你的密钥, 请不要将密钥共享给他人, 因为你共享给别人用你自己就会被挤下线  
-> wsAddress是Lagrange的ws服务器地址,
+> wsAddress是Lagrange的ws服务器地址 注意这个地址是***正向Websocket***地址
 
 > lang是多语言, 可用的值见 [多语言支持](#多语言支持)
 
