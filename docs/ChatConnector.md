@@ -35,7 +35,7 @@
 ## OneBot消息处理器
 
 此插件对接`Lagrange.OneBot`框架你需要前往[Lagrange](https://github.com/LagrangeDev/Lagrange.Core/)  
-下载最新的Lagrange并配置正向Websocket和正向HTTP 也可以按需配置AccessToken
+下载最新的Lagrange并配置正向Websocket 也可以按需配置AccessToken
 下载最新的jar文件放入你的Velocity插件文件夹内  
 然后~~原神, 启动!~~
 
@@ -77,12 +77,6 @@
     "Port": 8081,
     "HeartBeatInterval": 5000,
     "HeartBeatEnable": true,
-    "AccessToken": "114514114514"
-  },
-  {
-    "Type": "Http",
-    "Host": "*",
-    "Port": 8083,
     "AccessToken": "114514114514"
   }
 ]
