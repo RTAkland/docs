@@ -41,6 +41,8 @@
 
 ### 配置OneBotV11实现
 
+> ChatConnector支持 `正向Websocket` 和 `反向Websocket`
+
 #### 已支持解析的消息类型
 
 |      功能/平台      | MC向QQ | QQ向MC |
@@ -78,6 +80,22 @@
     "HeartBeatInterval": 5000,
     "HeartBeatEnable": true,
     "AccessToken": "114514114514"
+  }
+]
+```
+
+或者使用反向Websocket
+
+```json
+ [
+  {
+    "Type": "ReverseWebSocket",
+    "Host": "127.0.0.1",
+    "Port": 6760,
+    "Suffix": "/",
+    "ReconnectInterval": 5000,
+    "HeartBeatInterval": 5000,
+    "AccessToken": "114514"
   }
 ]
 ```
@@ -130,17 +148,15 @@ Kook中暂时只支持纯文本以及部分emoji表情的解析/收发
 
 ```json
 {
-  "secretKey": "<your secret key here>",
+  "secretKey": "dgt",
   "lang": "zh_cn",
-  "wsAddress": "ws://127.0.0.1:8081/ws",
-  "accessToken": "1145141919810",
+  "wsAddress": "wss://mc.dgtmc.top:8081/ws",
+  "accessToken": "114514ghpA@",
   "messageHandler": "OneBot",
   "groupId": [
-    114514,
-    1919810
+    985927054
   ],
   "events": [
-    "InitEvent",
     "PlayerLeaveEvent",
     "PlayerJoinEvent",
     "PlayerChatEvent",
@@ -150,12 +166,10 @@ Kook中暂时只支持纯文本以及部分emoji表情的解析/收发
   "permission": {
     "owner": 3458671395,
     "admins": [
-      114514,
-      1919810
+      1
     ],
     "others": [
-      66666,
-      33343131
+      66666
     ]
   },
   "rcons": {
@@ -177,12 +191,22 @@ Kook中暂时只支持纯文本以及部分emoji表情的解析/收发
   },
   "proxy": {
     "host": "127.0.0.1",
-    "port": 7890
+    "port": 7890,
+    "enabled": false
   },
   "commands": {
     "execPermission": "ADMIN",
     "whitelistPermission": "ADMIN",
-    "langCommandPermission": "ADMIN"
+    "changeLangPermission": "ADMIN",
+    "statusPermission": "OTHER",
+    "setuPermission": "OTHER",
+    "musicPermission": "OTHER",
+    "listPermission": "OTHER",
+    "helpPermission": "OTHER",
+    "echoPermission": "OTHER",
+    "checkUpdatePermission": "OTHER",
+    "atPermission": "OTHER",
+    "aliasesPermission": "OTHER"
   },
   "style": {
     "crossServerMessageStyle": "<italic><gray>",
@@ -193,7 +217,8 @@ Kook中暂时只支持纯文本以及部分emoji表情的解析/收发
     "!!",
     "！！",
     "/"
-  ]
+  ],
+  "oneBotReservePort": 6760
 }
 ```
 
@@ -209,7 +234,8 @@ Kook中暂时只支持纯文本以及部分emoji表情的解析/收发
 > 快速注册
 
 > messageHandler是消息处理器类型目前支持 `OneBot(QQ机器人)` `Kook(开黑啦)` `Discord`, 可选的值分别是
-> `OneBot` `Discord` `Kook` 请务必注意大小写
+> `OneBot` `Discord` `Kook` 请务必注意大小写, 默认的OneBot处理器是正向Websocket如果需要使用反向Websocket请将
+> messageHandler改为 `OneBotReserve` 并在配置文件最末尾找到 `oneBotReservePort`修改成一个没有被占用的端口
 
 > groupId是需要监听消息的QQ群号, 如果你用的是Kook或者Discord你需要将其设置为文字频道的频道号, 可以设置多个群号/频道号,
 > 只需要用数组的形式包裹住群号/频道号就行, 例如: `[114514,12346,231323112]`
@@ -242,6 +268,8 @@ Kook中暂时只支持纯文本以及部分emoji表情的解析/收发
 
 > removeUnicodeChars表示是否移除单个单元的Unicode字符 默认为开启, 如果开启消息则会更简洁,
 > 但是无法正常显示Emoji表情, QQ小黄脸表情正常显示(见左图)。如果关闭此功能的效果见右图
+
+> oneBotReservePort 是反向Websocket的端口如果你使用的是正向那么可以不用管
 
 <div style="display: flex;">
     <img src="../images/chatc/remove-chars.png" alt="Image 1" style="width: 50%; height: auto;">
