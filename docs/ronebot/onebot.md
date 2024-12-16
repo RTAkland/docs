@@ -11,7 +11,7 @@
 ```kotlin
 maven {
     name = "ROneBotRepo"
-    url = uri("https://maven.pkg.github.com/OWNER/REPOSITORY")
+    url = uri("https://maven.pkg.github.com/RTAkland/ROneBot")
 }
 ```
 
