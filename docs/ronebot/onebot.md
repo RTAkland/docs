@@ -10,8 +10,8 @@
 
 ```kotlin
 maven {
-    name = "ROneBotRepo"
-    url = uri("https://maven.pkg.github.com/RTAkland/ROneBot")
+    name = "maven.rtast.cn"
+    url = uri("https://maven.rtast.cn/repository/maven-releases/")
 }
 ```
 
@@ -24,8 +24,10 @@ dependencies {
 }
 ```
 
-> 替换成最新版本, 最新版本可以在Gitlab的Maven仓库查看, [这里](https://github.com/RTAkland/ROneBot/packages)是
-> 所有版本的Maven仓库地址尽量使用最新版进行开发~
+> 替换成最新版本, 最新版本可以在Gitlab的Maven仓库查看,
+> [这里](https://maven.rtast.cn/#browse/browse:maven-releases:cn%2Frtast%2Fronebot-onebot-v11)
+> 是 所有版本的Maven仓库地址尽量使用最新版进行开发~ (你也可以查看仓库的tag, 因为每次有新的tag被推送进仓库就会自动触发Github
+> Actions进行发布包)
 
 # 最小实例
 
