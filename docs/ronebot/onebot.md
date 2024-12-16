@@ -10,8 +10,8 @@
 
 ```kotlin
 maven {
-    name = "repo.rtast.cn"
-    url = uri("https://repo.rtast.cn/api/v4/projects/33/packages/maven")
+    name = "ROneBotRepo"
+    url = uri("https://maven.pkg.github.com/OWNER/REPOSITORY")
 }
 ```
 
@@ -24,7 +24,7 @@ dependencies {
 }
 ```
 
-> 替换成最新版本, 最新版本可以在Gitlab的Maven仓库查看, [这里](https://repo.rtast.cn/RTAkland/ronebot/-/packages)是
+> 替换成最新版本, 最新版本可以在Gitlab的Maven仓库查看, [这里](https://github.com/RTAkland/ROneBot/packages)是
 > 所有版本的Maven仓库地址尽量使用最新版进行开发~
 
 # 最小实例
