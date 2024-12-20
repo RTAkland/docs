@@ -57,4 +57,4 @@ dependencies {
 
 # 注意事项
 
-目前只有releases和snapshots两个仓库并且都是公开的仓库
+现在有`releases` 和 `snapshots`是公开仓库 `private`是私有仓库, 发布和下载包都需要认证, 通过API访问私有包也需要认证
