@@ -22,3 +22,39 @@ $ java -jar mvnrepo-backend-all.jar [-p 8000] [-t 114514]
 > 并且输出在控制台, 所以千万不要泄露出数据库文件
 
 > 暂时没有前端页面(
+
+# 发布包
+
+在build.gradle.kts中添加以下内容
+
+```kotlin
+publishing {
+    // 其他配置
+    repositories {
+        maven {
+            url = uri("http://127.0.0.1:8088/releases")
+            isAllowInsecureProtocol = true
+            credentials {
+                username = "admin"
+                password = "<xxxxxx>"
+            }
+        }
+    }
+}
+```
+
+# 下载包
+
+```kotlin
+repositories {
+    maven("http://127.0.0.1:8088/releases")
+}
+
+dependencies {
+    implementation("cn.rtast:test-publish-4:0.0.1")
+}
+```
+
+# 注意事项
+
+目前只有releases和snapshots两个仓库并且都是公开的仓库
