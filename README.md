@@ -15,3 +15,8 @@
 [ROneBot](docs/ronebot/README.md)
 
 > 这是一个Kotlin协程OneBot11 SDK
+
+## MVNRepo
+
+[MVNRepo](docs/mvnrepo/MVNRepo.md)
+[MVNRepoAPI](docs/mvnrepo/MVNRepoAPI.md)
