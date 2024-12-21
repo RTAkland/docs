@@ -112,8 +112,11 @@ $ curl http://127.0.0.1:8088/-/api/statistics?group=cn.rtast&repository=releases
 `GET`请求发送到`/-/api/artifacts/search`并添加查询参数`artifactId`就像下面这样
 
 ```shell
-$ curl http://127.0.0.1:8088/-/api/artifacts/search?artifactId=test-publish
+$ curl http://127.0.0.1:8088/-/api/artifacts/search?keyword=test-publish&type=<类型>
 ```
+
+> 这里的类型是字符串枚举, 可以是`artifactId`, `groupId`, `version`, `repository`, `author`
+
 
 服务器会返回下面格式的json数据
 
