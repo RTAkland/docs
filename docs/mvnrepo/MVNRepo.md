@@ -6,7 +6,7 @@
 
 ```shell
 $ chmod +x ./gradlew  // Windows上可选
-$ ./gradlew build
+$ ./gradlew build -x :test-impl:build -x :test-publish:build
 $ cd mvnrepo-backend/build/libs
 ```
 
