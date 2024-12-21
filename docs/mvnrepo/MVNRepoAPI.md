@@ -107,6 +107,8 @@ $ curl http://127.0.0.1:8088/-/api/statistics?group=cn.rtast&repository=releases
 
 ## 搜索包
 
+> 此API端点需要认证
+
 `GET`请求发送到`/-/api/artifacts/search`并添加查询参数`artifactId`就像下面这样
 
 ```shell
