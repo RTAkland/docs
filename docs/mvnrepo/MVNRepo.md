@@ -58,3 +58,9 @@ dependencies {
 # 注意事项
 
 现在有`releases` 和 `snapshots`是公开仓库 `private`是私有仓库, 发布和下载包都需要认证, 通过API访问私有包也需要认证
+
+> 整个程序分配100MB的内存完全够用(不包括虚拟机占用的内存), 甚至可以分配50MB, 用下面的方式分配JVM内存
+
+```shell
+$ java -Xmx50M -jar mvnrepo-backend-all.jar
+```
