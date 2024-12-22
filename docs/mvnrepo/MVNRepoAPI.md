@@ -86,6 +86,8 @@ POST到`/-/api/user`请求体携带以下格式的内容
 
 直到访问的是文件会直接下载
 
+> 在URL加上`?limit=10`参数可以限制查询的最大数量, 不添加默认为100, 无上限
+
 ## 包下载量统计
 
 `GET`请求发送到`/-/api/statistics`并且加上查询参数`artifactId`, `groupId`, `repository`, 就像下面这样
