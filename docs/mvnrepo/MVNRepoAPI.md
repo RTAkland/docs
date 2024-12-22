@@ -4,15 +4,29 @@
 
 # 前言
 
-所有的API端点都是通过Basic的方式认证的, 简单来说就是添加一个请求头`Authorization: Basic <xxxxxx>`
-这里的<xxxxxx>就是用户名加密码然后base64编码之后的形式, 看下面的例子
+所有的API端点都是通过JWT的方式认证的, 登录见[登录](#登录)
 
-```shell
-$ echo -n 'user:password' | base64
+# 登录
+
+POST到`/-/api/login`请求体携带以下格式的内容
+
+```json
+{
+  "username": "admin",
+  "password": "admin"
+}
 ```
 
-输出后的base64字符串替换掉上面的<xxxxxx>, 这就是basic认证, 如果你的服务器暴露在公网请务必使用https加密,
-因为这种方式相当于直接把密码告诉`某些人`
+服务端会返回下面格式的json数据
+
+```json
+{
+  "access_token": "xxxxx",
+  "expires_in": 7200
+}
+```
+
+然后访问任意一个端点并且带上`Authorization`头部, 值为`Bearer xxxxx`即可
 
 # 用户
 
