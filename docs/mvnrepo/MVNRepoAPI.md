@@ -84,17 +84,19 @@ POST到`/-/api/user`请求体携带以下格式的内容
   "data": [
     {
       "name": "releases",
-      "idDirectory": true
+      "idDirectory": true,
+      "size": 114514
     },
     {
       "name": "snapshots",
-      "idDirectory": true
+      "idDirectory": true,
+      "size": 1919810
     }
   ]
 }
 ```
 
-这两个代表的是仓库名
+这两个代表的是仓库名, size是文件的大小单位是Byte字节, 如果是文件夹的话则为0
 继续在URI中添加仓库名, 就像这样`http://127.0.0.1:8088/-/api/artifacts/releases`
 服务端还是会返回所有的文件列表格式和上方一样
 
