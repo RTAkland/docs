@@ -148,15 +148,17 @@ Kook中暂时只支持纯文本以及部分emoji表情的解析/收发
 
 ```json
 {
-  "secretKey": "<这里填写你的密钥>",
+  "secretKey": "<your secret key here>",
   "lang": "zh_cn",
-  "wsAddress": "ws://127.0.0.1:8081",
-  "accessToken": "114514114514",
+  "wsAddress": "ws://127.0.0.1:8081/ws",
+  "accessToken": "1145141919810",
   "messageHandler": "OneBot",
   "groupId": [
-    985927054
+    114514,
+    1919810
   ],
   "events": [
+    "InitEvent",
     "PlayerLeaveEvent",
     "PlayerJoinEvent",
     "PlayerChatEvent",
@@ -166,10 +168,12 @@ Kook中暂时只支持纯文本以及部分emoji表情的解析/收发
   "permission": {
     "owner": 3458671395,
     "admins": [
-      1
+      114514,
+      1919810
     ],
     "others": [
-      66666
+      66666,
+      33343131
     ]
   },
   "rcons": {
@@ -199,8 +203,6 @@ Kook中暂时只支持纯文本以及部分emoji表情的解析/收发
     "whitelistPermission": "ADMIN",
     "changeLangPermission": "ADMIN",
     "statusPermission": "OTHER",
-    "setuPermission": "OTHER",
-    "musicPermission": "OTHER",
     "listPermission": "OTHER",
     "helpPermission": "OTHER",
     "echoPermission": "OTHER",
@@ -209,8 +211,8 @@ Kook中暂时只支持纯文本以及部分emoji表情的解析/收发
     "aliasesPermission": "OTHER"
   },
   "style": {
-    "crossServerMessageStyle": "<italic><gray>",
-    "groupMessageStyle": "<italic><gray>"
+    "crossServerMessageStyle": "<green>[{{serverName}}]</green> > [{{playerName}}]: {{message}}",
+    "groupMessageStyle": "<green>[QQ群({{groupName}})]</green> > [{{senderName}}]: {{message}}"
   },
   "memesReply": true,
   "commandPrefixes": [
@@ -218,7 +220,8 @@ Kook中暂时只支持纯文本以及部分emoji表情的解析/收发
     "！！",
     "/"
   ],
-  "oneBotReservePort": 6760
+  "oneBotReservePort": 6760,
+  "mcForwardPrefix": "qq"
 }
 ```
 
@@ -259,8 +262,8 @@ Kook中暂时只支持纯文本以及部分emoji表情的解析/收发
 > commands表示每个命令所需要的权限的ID, `Owner` `Admin` `Other(所有人都可以执行)`
 
 > style中的内容表示来自群聊或者跨服聊天字体的样式, 使用MiniMessage语法来定义,
-> 见: [MiniMessage](https://docs.advntr.dev/minimessage/format.html)  
-> 默认都是 `<italic><gray>` 表示 _斜体_ <font color="gray">灰色</font>
+> 见: [MiniMessage](https://docs.advntr.dev/minimessage/format.html)
+> ***注意: 使用`{{}}`包裹的都是变量请不要随意修改***
 
 > memesReply表示是否开启梗回复, 比如 在群中发送114514会自动回复1919810,
 > 这些梗的json文件可以从[这里](https://static.rtast.cn/chatc/memes.json)找到
