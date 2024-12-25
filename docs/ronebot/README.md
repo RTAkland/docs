@@ -2,6 +2,7 @@
 
 1. 建议使用最新版本的Kotlin, 因为本项目会第一时间使用稳定版本的Kotlin
 2. 项目的JDK版本最低为`11` 即: 你的JDK版本必须大于等于11
+3. Github仓库地址: https://github.com/RTAkland/ROneBot
 
 # OneBotV11
 
