@@ -218,7 +218,8 @@ Kook中暂时只支持纯文本以及部分emoji表情的解析/收发
     "！！",
     "/"
   ],
-  "oneBotReservePort": 6760
+  "oneBotReservePort": 6760,
+  "enableTabList": true
 }
 ```
 
@@ -270,6 +271,8 @@ Kook中暂时只支持纯文本以及部分emoji表情的解析/收发
 > 但是无法正常显示Emoji表情, QQ小黄脸表情正常显示(见左图)。如果关闭此功能的效果见右图
 
 > oneBotReservePort 是反向Websocket的端口如果你使用的是正向那么可以不用管
+
+> enableTabList 是是否开启TabList功能, 如果开启则会在TabList上显示所有子服的玩家列表
 
 <div style="display: flex;">
     <img src="../images/chatc/remove-chars.png" alt="Image 1" style="width: 50%; height: auto;">
