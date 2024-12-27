@@ -113,7 +113,7 @@
 
 > 因为使用的是OneBotV11规范所以理论上大部分OneBotV11实现都可以使用此插件, 已经测试过的OneBot实现有以下OneBotV11实现:
 
-- LLOneBot(LiteLoader)
+- LLOneBot(LiteLoader)  ***注意: 目前使用LLOneBot会有消息转发延迟大的问题！！！建议使用Lagrange***
 - Lagrange.OneBot
 
 ## Kook消息处理器
