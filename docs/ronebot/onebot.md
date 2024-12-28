@@ -9,10 +9,6 @@
 ## 添加Maven仓库
 
 ```kotlin
-maven {
-    name = "maven.rtast.cn"
-    url = uri("https://maven.rtast.cn/releases/")
-}
 // RTAST的Maven仓库
 maven("https://maven.rtast.cn/releases/")
 // 由于使用了Mojang开源的brigadier所以需要添加Mojang的maven仓库
