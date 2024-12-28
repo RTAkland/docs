@@ -32,18 +32,12 @@
 
 # 使用
 
-## OneBot消息处理器
+> 这里不赘述配置OneBot11的实现, 只需要找到一个支持正向Websocket的OneBot11实现  
+> 这里给出几个可以用的实现: `Lagrange.OneBot` `Napcat` `LlOneBot`
 
-此插件对接`Lagrange.OneBot`框架你需要前往[Lagrange](https://github.com/LagrangeDev/Lagrange.Core/)  
-下载最新的Lagrange并配置正向Websocket 也可以按需配置AccessToken
-下载最新的jar文件放入你的Velocity插件文件夹内  
-然后~~原神, 启动!~~
+***注意: 除了Lagrange.OneBot其余都没有测试过, 请自行测试可用性***
 
-### 配置OneBotV11实现
-
-> ChatConnector支持 `正向Websocket` 和 `反向Websocket`
-
-#### 已支持解析的消息类型
+## 已支持解析的消息类型
 
 |      功能/平台      | MC向QQ | QQ向MC |
 |:---------------:|:-----:|:-----:|
@@ -66,95 +60,16 @@
 |    群公告(不含图片)    |       |   ✅   |
 | MiniMessage语法消息 |       |   ✅   |
 
-#### 配置Lagrange.OneBot
-
-你需要前往[Lagrange](https://github.com/LagrangeDev/Lagrange.Core/)仓库下载最新的Lagrange.OneBot, 并登录你的账号
-向`appsettings.json`文件中的`Implementations`设置为
-
-```json
-[
-  {
-    "Type": "ForwardWebSocket",
-    "Host": "*",
-    "Port": 8081,
-    "HeartBeatInterval": 5000,
-    "HeartBeatEnable": true,
-    "AccessToken": "114514114514"
-  }
-]
-```
-
-或者使用反向Websocket
-
-```json
- [
-  {
-    "Type": "ReverseWebSocket",
-    "Host": "127.0.0.1",
-    "Port": 6760,
-    "Suffix": "/",
-    "ReconnectInterval": 5000,
-    "HeartBeatInterval": 5000,
-    "AccessToken": "114514"
-  }
-]
-```
-
-你可以按需填写`AccessToken`键, 然后记住你的配置文件中的内容, ***请确保两个AccessToken一致***
-
-#### 注意事项
-
-> 一个OneBotV11实现可以对应多个群例如有一个机器人, 两个群并且
-> 这两个群都加入了, 两个MC服务器则需要在Velocity配置文件中的
-> groupId修改成需要监听的QQ群
-
-> Websocket的连接会在初始化插件的时候自动进行连接, 不需要手动连接
-> 当非正常关闭链接的时候会自动重连
-
-> 因为使用的是OneBotV11规范所以理论上大部分OneBotV11实现都可以使用此插件, 已经测试过的OneBot实现有以下OneBotV11实现:
-
-- LLOneBot(LiteLoader)  ***注意: 目前使用LLOneBot会有消息转发延迟大的问题！！！建议使用Lagrange***
-- Lagrange.OneBot
-
-## Kook消息处理器
-
-Kook中暂时只支持纯文本以及部分emoji表情的解析/收发
-
-> 如何才能找到你的聊天频道的ID呢? 答: 下面这张图箭头指向的就是你的频道ID位于最后一个斜杠后, 双击复制即可
-![channel_id](../images/chatc/kook-channel.png)
-
-打开`config.json`将复制下来的id填入`groupId`内
-
-> 那AccessToken如何获取呢? 答: 去开发者平台注册一个Bot 点击[这里](https://developer.kookapp.cn/app/index)
-> 快速注册一个Bot, 你需要登陆后点击右上角`新建应用`输入一个名称, 然后点击新建的Bot的头像, 点击左侧侧边栏的`机器人`
-> 在`机器人连接模式`下可以找到`Token`字样, 这就是AccessToken了复制下来将其填入`config.json` 内的`AccessToken`
-> 消息处理器
-
-## Discord消息处理器
-
-!> Discord 中只支持纯文本以及部分emoji表情解析
-
-!> 由于某种原因使用Discord消息处理器需要使用代理才能正常使用(如果你在国内)
-
-你需要将`messageHandler`修改成`Discord`然后accesstoken填你的Bot的Token再配置一个HTTP代理，
-最后将`groupId`修改成你的频道ID就可以了
-
-# 配置ChatConnector
-
-在`plugins/ChatConnector`文件夹内找到`config.json`默认配置文件如下:
-
-<details>
-<summary>点击这里展开默认的配置文件</summary>
+## 配置
 
 ```json
 {
-  "secretKey": "dgt",
-  "lang": "zh_cn",
-  "wsAddress": "wss://mc.dgtmc.top:8081/ws",
-  "accessToken": "114514ghpA@",
-  "messageHandler": "OneBot",
+  "secretKey": "<your secret key here>",
+  "wsAddress": "ws://127.0.0.1:8081/ws",
+  "accessToken": "1145141919810",
   "groupId": [
-    985927054
+    114514,
+    1919810
   ],
   "events": [
     "PlayerLeaveEvent",
@@ -166,10 +81,12 @@ Kook中暂时只支持纯文本以及部分emoji表情的解析/收发
   "permission": {
     "owner": 3458671395,
     "admins": [
-      1
+      114514,
+      1919810
     ],
     "others": [
-      66666
+      66666,
+      33343131
     ]
   },
   "rcons": {
@@ -189,147 +106,18 @@ Kook中暂时只支持纯文本以及部分emoji表情的解析/收发
       }
     ]
   },
-  "proxy": {
-    "host": "127.0.0.1",
-    "port": 7890,
-    "enabled": false
-  },
-  "commands": {
-    "execPermission": "ADMIN",
-    "whitelistPermission": "ADMIN",
-    "changeLangPermission": "ADMIN",
-    "statusPermission": "OTHER",
-    "setuPermission": "OTHER",
-    "musicPermission": "OTHER",
-    "listPermission": "OTHER",
-    "helpPermission": "OTHER",
-    "echoPermission": "OTHER",
-    "checkUpdatePermission": "OTHER",
-    "atPermission": "OTHER",
-    "aliasesPermission": "OTHER"
-  },
   "style": {
-    "crossServerMessageStyle": "<italic><gray>",
-    "groupMessageStyle": "<italic><gray>"
+    "crossServerMessageStyle": "<green>[{{serverName}}]</green> > [{{playerName}}]: {{message}}",
+    "groupMessageStyle": "<green>[QQ群({{groupName}})]</green> > [{{senderName}}]: {{message}}"
   },
-  "memesReply": true,
-  "commandPrefixes": [
-    "!!",
-    "！！",
-    "/"
-  ],
-  "oneBotReservePort": 6760,
+  "mcForwardPrefix": "",
   "enableTabList": true
 }
 ```
 
-</details>
-
-> 其中secretKey是你购买的时候我发方法给你的密钥, 请不要将密钥共享给他人, 因为你共享给别人用你自己就会被挤下线  
-> wsAddress是Lagrange的ws服务器地址 注意这个地址是***正向Websocket***地址
-
-> lang是多语言, 可用的值见 [多语言支持](#多语言支持)
-
-> accessToken是访问密钥, 在Lagrange中可以设置
-> 如果你使用了Kook或者Discord你需要注册一个App, Kook注册应用可以点[这里](https://developer.kookapp.cn/app/index)
-> 快速注册
-
-> messageHandler是消息处理器类型目前支持 `OneBot(QQ机器人)` `Kook(开黑啦)` `Discord`, 可选的值分别是
-> `OneBot` `Discord` `Kook` 请务必注意大小写, 默认的OneBot处理器是正向Websocket如果需要使用反向Websocket请将
-> messageHandler改为 `OneBotReserve` 并在配置文件最末尾找到 `oneBotReservePort`修改成一个没有被占用的端口
-
-> groupId是需要监听消息的QQ群号, 如果你用的是Kook或者Discord你需要将其设置为文字频道的频道号, 可以设置多个群号/频道号,
-> 只需要用数组的形式包裹住群号/频道号就行, 例如: `[114514,12346,231323112]`
-
-> events是监听的事件类型, 这里是`Event`类型
-> `PlayerJoinEvent` `PlayerLeaveEvent` `PlayerChatEvent` `InitEvent` `GroupMessageEvent` `CrossServerMessageEvent`
-> `PlayerJoinEvent`表示玩家加入的事件如果添加了这一行则表示玩家加入服务器则会向qq群发送消息  
-> `PlayerLeaveEvent`表示玩家离开服务器的事件  
-> `PlayerChatEvent`表示玩家聊天事件(这个聊天事件指的是MC里的聊天事件)  
-> `InitEvent`表示是否在插件初始化完成后在群内发送`初始化成功xxxxx`字样的信息  
-> `GroupMessageEvent`表示是否转发QQ群/Discord/Kook频道的消息到游戏内  
-> `CrossServerMessageEvent`表示是否开启跨服聊天
-
-> permission表示对应QQ号拥有的级别
-
-> rcons表示后端服务器的RCON地址, 配置了rcon可以执行一些需要跟游戏交互的指令例如`白名单操作`
-
-> commands表示每个命令所需要的权限的ID, `Owner` `Admin` `Other(所有人都可以执行)`
-
-> style中的内容表示来自群聊或者跨服聊天字体的样式, 使用MiniMessage语法来定义,
-> 见: [MiniMessage](https://docs.advntr.dev/minimessage/format.html)  
-> 默认都是 `<italic><gray>` 表示 _斜体_ <font color="gray">灰色</font>
-
-> memesReply表示是否开启梗回复, 比如 在群中发送114514会自动回复1919810,
-> 这些梗的json文件可以从[这里](https://static.rtast.cn/chatc/memes.json)找到
-
-> commandPrefixes表示群中命令的前缀默认为半角(英文输入法)的感叹号和全角(中文输入法)的感叹号,
-> 如果列表中添加了`#`作为命令前缀那么可以使用 `#list`来执行所有命令, 你也可以添加一行 `""`来取消掉
-> 命令前缀
-
-> removeUnicodeChars表示是否移除单个单元的Unicode字符 默认为开启, 如果开启消息则会更简洁,
-> 但是无法正常显示Emoji表情, QQ小黄脸表情正常显示(见左图)。如果关闭此功能的效果见右图
-
-> oneBotReservePort 是反向Websocket的端口如果你使用的是正向那么可以不用管
-
-> enableTabList 是是否开启TabList功能, 如果开启则会在TabList上显示所有子服的玩家列表
-
-<div style="display: flex;">
-    <img src="../images/chatc/remove-chars.png" alt="Image 1" style="width: 50%; height: auto;">
-    <img src="../images/chatc/no-remove-chars.png" alt="Image 2" style="width: 50%; height: auto;">
-</div>
-
-# 多语言支持
-
-!> ChatConnector支持多语言，例如`简体中文` `英语` 分别对应了`zh_cn` `en_us`
-你可以在游戏内或者QQ群/Kook/Discord频道内分别使用 `/chatc lang zh_cn`(游戏指令) `!!lang zh_cn`(群指令) 来切换语言
-
-# 命令
-
-## 游戏内命令
-
-使用`/chatc` 来获取所有的子命令
-
-> `/chatc reload` 重载配置文件(需要在控制台执行)  
-> `/chatc reconnect` 重新连接Websocket服务器  
-> `/chatc disconnect` 断开Websocket的连接(需要在控制台执行)  
-> `/chatc lang <lang>` 来切换语言, 支持的语言列表见 [多语言支持](#多语言支持)(需要在控制台执行)  
-> `/chatc check-update` 检查插件是否有新版本  
-> `/chatc help` 列出所有子命令(需要在控制台执行)
-
-## 群命令
-
-直接发送群命令可以获得这个命令的帮助信息(如果这个命令有参数并且你有这个命令的执行权限)
-
-> `!!help` 获取所有群命令  
-> `!!at <ID>` 艾特指定ID的人,被艾特的人会在物品栏上方显示一条标题, 不用指定特定的子服。 输入 `!!at all`来at所有人  
-> `!!lang <lang>` 更改插件的多语言选项,可选的列表见: [多语言支持](#多语言支持)  
-> `!!exec <rcon> <command>` 指定一个服务器执行游戏原版命令, 服务器的名字是配置文件中`rcons`内的名字  
-> `!!status` 获取插件运行状态  
-> `!!wh` 可以关闭(off)/开启(on)/添加(add)/删除(remove)白名单  
-> `!!list` 查看所有子服在线的玩家列表  
-> `!!check-update` 检查插件是否有新版本
-
-### 群命令别名
-
-下面是`aliases.yml`的默认值
-
-```yaml
-wh:
-  - whitelist
-  - 白名单
-check-update:
-  - cu
-  - 检查更新
-```
-
-> 键值是原本的命令, 所有原本的命令可以用 `!!help` 来显示出来, 支持添加
-> 多个别名, 支持中文, 但是更改之后无法使用 `/chatc reload` 来重新加载,
-> 你必须重新启动velocity才能应用这些别名更改
+这是默认的配置文件, 你可以按需修改, 如果不知道怎么配置的话可以联系我帮忙配置
 
 # 注
-
-!> 如果你使用了本插件并且控制台输出卡在`正在获取群信息...`那么说明你的机器人进入群的时间太短过几天再试试
 
 !> 因为QQ官方机器人API限制了主动发送消息次数(每个月限制4条消息)，所以暂时不支持QQ官方机器人API消息处理器
 
