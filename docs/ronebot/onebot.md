@@ -9,10 +9,12 @@
 ## 添加Maven仓库
 
 ```kotlin
-// RTAST的Maven仓库
-maven("https://maven.rtast.cn/releases/")
-// 由于使用了Mojang开源的brigadier所以需要添加Mojang的maven仓库
-maven("https://libraries.minecraft.net")
+repositories {
+    // RTAST的Maven仓库
+    maven("https://maven.rtast.cn/releases/")
+    // 由于使用了Mojang开源的brigadier所以需要添加Mojang的maven仓库
+    maven("https://libraries.minecraft.net")
+}
 ```
 
 ## 添加依赖
@@ -85,19 +87,27 @@ fun main() {
 
 ```kotlin
 class TestBrigadierCommand : BrigadierCommand() {
-    override fun register(dispatcher: CommandDispatcher<CommandContext>) {
-        dispatcher.register(
-            LiteralArgumentBuilder.literal<CommandContext>("test")
-                .executes { context ->
-                    println("executed")
-                    0
-                }.then(
-                    LiteralArgumentBuilder.literal<CommandContext>("test")
-                        .executes { context ->
-                            println("sub command executed")
-                            0
+    private val scope = CoroutineScope(Dispatchers.IO)
+
+    override fun register(dispatcher: CommandDispatcher<CommandSource>) {
+        val root = LiteralArgumentBuilder.literal<CommandSource>("/foo")
+            .then(
+                // 这里的两个泛型参数一个是命令源(上下文固定写`CommandSource`), 另外一个是需要接收参数的类型
+                RequiredArgumentBuilder.argument<CommandSource, String>("bar", StringArgumentType.string())
+                    .executes {
+                        // 这里必须catch所有的异常
+                        scope.launch {
+                            try {
+                                println(StringArgumentType.getString(it, "bar"))
+                            } catch (e: Exception) {
+                                e.printStackTrace()
+                            }
                         }
-                ))
+                        0
+                    }
+            )
+        // 这里为`/foo`创建了一个重定向(指令别名)
+        dispatcher.register(LiteralArgumentBuilder.literal<CommandSource>("/test").redirect(root.build()))
     }
 }
 
@@ -107,28 +117,9 @@ suspend fun main() {
 }
 ```
 
-> 注意上面示例代码中的泛型: `CommandContext` 的意义是下方`executes`函数的上下文类型, 注意不要写错了!
+> 注意上面示例代码中的泛型: `CommandSource` 的意义是下方`executes`函数的上下文类型, 注意不要写错了!
 
 > 使用这个命令管理器注册的缺点就是 `executes`函数体是Java中的普通函数, 并**不是挂起函数***
-> 你需要执行Action的时候就需要使用`CoroutineScope.launch`来在普通函数里启动一个
-> 协程(进程), 就像下面这样
-
-```kotlin
-class TestBrigadierCommand : BrigadierCommand() {
-    private val scope = CoroutineScope(Dispatchers.IO)
-
-    override fun register(dispatcher: CommandDispatcher<CommandContext>) {
-        dispatcher.register(
-            LiteralArgumentBuilder.literal<CommandContext>("test")
-                .executes { context ->
-                    scope.launch {
-                        (context.source.message as GroupMessage).reply("114514")
-                    }
-                    0
-                })
-    }
-}
-```
 
 > 由于在OneBot中消息有两种, 分别是: 群消息, 私聊消息. 所以`CommandContext`中提供了`messageType`枚举字段
 > 以便判断消息类型, 在ROneBot中两种消息都实现了`IMessage`接口, 所以可以进行安全的强制类型转换, 如下所示
