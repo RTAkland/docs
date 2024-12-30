@@ -8,10 +8,6 @@
 
 [OneBotV11](docs/ronebot/onebot.md)
 
-# Kritor
-
-[Kritor](docs/ronebot/kritor.md)
-
 # Satori
 
 [Satori](docs/ronebot/satori.md)
