@@ -67,6 +67,7 @@
 3. 群服互通， 将QQ群和MC的消息相互转发, 也可以设置游戏内转发的前缀, 必须以某个前缀开头的消息才会被转发到QQ群, 默认为任何消息都转发
 4. QQ群内执行MC的命令
 5. 操作白名单
+6. 多QQ群转发 - 多个QQ群的消息转发到MC，MC的消息同样会被转发到所有在配置文件内的群中
 
 ## 指令
 
@@ -107,20 +108,25 @@
 
 ```json
 {
+   // 密钥
   "secretKey": "<your secret key here>",
+   // 正向Websocket连接地址
   "wsAddress": "ws://127.0.0.1:8081/ws",
   "accessToken": "1145141919810",
+   // 表示监听的群聊， 必须是真实存在并且机器人在群内的， 如果你只需要监听一个群的话，那就把其他的全部删掉
   "groupId": [
     114514,
     1919810
   ],
+   // 表示需要上报的事件， 不需要哪个事件就删除掉哪一行
   "events": [
-    "PlayerLeaveEvent",
-    "PlayerJoinEvent",
-    "PlayerChatEvent",
-    "GroupMessageEvent",
-    "CrossServerMessageEvent"
+    "PlayerLeaveEvent",  // 玩家退出游戏
+    "PlayerJoinEvent",  // 玩家加入游戏
+    "PlayerChatEvent",  // 玩家聊天消息
+    "GroupMessageEvent",  // 从QQ群转发消息
+    "CrossServerMessageEvent"  // 跨服聊天消息
   ],
+   // 权限配置, owner和admins权限一样， others表示没权限， 可以不填
   "permission": {
     "owner": 3458671395,
     "admins": [
@@ -132,7 +138,9 @@
       33343131
     ]
   },
+   // 配置RCON
   "rcons": {
+     // 是否启用RCON， 如果需要操作白名单的话就需要开启并正确配置
     "enabled": false,
     "rcons": [
       {
@@ -150,11 +158,13 @@
     ]
   },
   "style": {
+     // 跨服聊天的消息样式， 遵循MiniMessage语法
     "crossServerMessageStyle": "<green>[{{serverName}}]</green> > [{{playerName}}]: {{message}}",
+     // QQ群转发来的消息的样式， 遵循MiniMessage语法
     "groupMessageStyle": "<green>[QQ群({{groupName}})]</green> > [{{senderName}}]: {{message}}"
   },
-  "mcForwardPrefix": "",
-  "enableTabList": true
+  "mcForwardPrefix": "",  // 这里是控制以什么前缀开头的消息会被转发到QQ群, 设置成空就是任何消息都会被转发到QQ群
+  "enableTabList": true  // 是否开启在Tab列表显示其他子服的玩家
 }
 ```
 
