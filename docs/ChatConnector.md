@@ -60,24 +60,73 @@
 |    群公告(不含图片)    |       |   ✅   |
 | MiniMessage语法消息 |       |   ✅   |
 
+## 支持的功能
+
+1. 支持在Tab列表中显示出其他子服的玩家名，并且将其他子服的玩家名字设置成灰色
+2. 跨服聊天 - 其他子服发的消息可以广播到全部子服
+3. 群服互通， 将QQ群和MC的消息相互转发, 也可以设置游戏内转发的前缀, 必须以某个前缀开头的消息才会被转发到QQ群, 默认为任何消息都转发
+4. QQ群内执行MC的命令
+5. 操作白名单
+6. 多QQ群转发 - 多个QQ群的消息转发到MC，MC的消息同样会被转发到所有在配置文件内的群中
+
+## 指令
+
+### 游戏内指令
+
+> 游戏内的指令都是/chatc开头的
+
+可用的游戏内指令如下
+
+1. /chatc reconnect - 重连Websocket和Rcon
+
+### 群内指令
+
+> 群内的指令前缀可以为一下三种的任意一个
+
+1. !!
+2. ！！
+3. /
+
+> 意思就是如果一个命令是`help` 那么你可以在群内发送下面三种情况中的任意一种就能成功执行
+
+1. !!help
+2. ！！help
+3. /help
+
+可用的群内指令如下
+
+1. !!at <玩家名>  在群内@游戏内的玩家(不论在哪个子服, 只要是通过Velocity连接到的玩家都能@), 被@的玩家会在屏幕上提示(
+   但是没有声音, 因为这是Velocity的限制)
+2. !!exec <rcon名字> <指令>  在群内对子服执行命令, 需要配置RCOn
+3. !!help 帮助
+4. !!list 列出在线玩家
+5. !!reconnect 重连Websocket和RCON
+6. !!status 获取服务器状态
+7. !!wh <on | off | add | remove> [玩家名] 操作白名单
+
 ## 配置
 
 ```json
 {
+   // 密钥
   "secretKey": "<your secret key here>",
+   // 正向Websocket连接地址
   "wsAddress": "ws://127.0.0.1:8081/ws",
   "accessToken": "1145141919810",
+   // 表示监听的群聊， 必须是真实存在并且机器人在群内的， 如果你只需要监听一个群的话，那就把其他的全部删掉
   "groupId": [
     114514,
     1919810
   ],
+   // 表示需要上报的事件， 不需要哪个事件就删除掉哪一行
   "events": [
-    "PlayerLeaveEvent",
-    "PlayerJoinEvent",
-    "PlayerChatEvent",
-    "GroupMessageEvent",
-    "CrossServerMessageEvent"
+    "PlayerLeaveEvent",  // 玩家退出游戏
+    "PlayerJoinEvent",  // 玩家加入游戏
+    "PlayerChatEvent",  // 玩家聊天消息
+    "GroupMessageEvent",  // 从QQ群转发消息
+    "CrossServerMessageEvent"  // 跨服聊天消息
   ],
+   // 权限配置, owner和admins权限一样， others表示没权限， 可以不填
   "permission": {
     "owner": 3458671395,
     "admins": [
@@ -89,7 +138,9 @@
       33343131
     ]
   },
+   // 配置RCON
   "rcons": {
+     // 是否启用RCON， 如果需要操作白名单的话就需要开启并正确配置
     "enabled": false,
     "rcons": [
       {
@@ -107,11 +158,13 @@
     ]
   },
   "style": {
+     // 跨服聊天的消息样式， 遵循MiniMessage语法
     "crossServerMessageStyle": "<green>[{{serverName}}]</green> > [{{playerName}}]: {{message}}",
+     // QQ群转发来的消息的样式， 遵循MiniMessage语法
     "groupMessageStyle": "<green>[QQ群({{groupName}})]</green> > [{{senderName}}]: {{message}}"
   },
-  "mcForwardPrefix": "",
-  "enableTabList": true
+  "mcForwardPrefix": "",  // 这里是控制以什么前缀开头的消息会被转发到QQ群, 设置成空就是任何消息都会被转发到QQ群
+  "enableTabList": true  // 是否开启在Tab列表显示其他子服的玩家
 }
 ```
 
