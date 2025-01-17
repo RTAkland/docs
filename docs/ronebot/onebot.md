@@ -11,7 +11,7 @@
 ```kotlin
 repositories {
     // RTAST的Maven仓库
-    maven("https://pkg.rtast.cn/releases/")
+    maven("https://repo.maven.rtast.cn/releases/")
 }
 ```
 
