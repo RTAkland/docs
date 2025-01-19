@@ -25,9 +25,32 @@ dependencies {
 ```
 
 > 替换成最新版本, 最新版本可以在Gitlab的Maven仓库查看,
-> [这里](https://maven.rtast.cn/#/releases/cn/rtast/ronebot-onebot-v11)
+> [这里](https://repo.maven.rtast.cn/#/releases/cn/rtast/ronebot-onebot-v11)
 > 是 所有版本的Maven仓库地址尽量使用最新版进行开发~ (你也可以查看仓库的tag, 因为每次有新的tag被推送进仓库就会自动触发Github
 > Actions进行发布包)
+
+### 快照版本
+
+快照版本快照版本在每次commit之后都会生成，使用快照版本需要借助`jitpack.io`来实现
+
+添加仓库
+
+```kotlin
+repositories {
+    maven("https://jitpack.io")
+}
+```
+
+添加依赖
+
+```kotlin
+dependencies {
+    // 这里的版本替换成最新版本
+    implementation("com.github.RTAkland:ROneBot:${version}")
+}
+```
+
+使用快照版本
 
 # 最小实例
 
@@ -96,7 +119,11 @@ class TestBrigadierCommand : BrigadierCommand() {
                         // 这里必须catch所有的异常
                         scope.launch {
                             try {
+                                // 这里是使用Brigadier提供的获取命令参数输入的方法
                                 println(StringArgumentType.getString(it, "bar"))
+
+                                // 这里是ROneBot拓展的获取命令参数输入的方法
+                                println(it.getString("any"))
                             } catch (e: Exception) {
                                 e.printStackTrace()
                             }
@@ -126,8 +153,8 @@ suspend fun main() {
 // ...
 .executes { context ->
     scope.launch {
-        (context.source.message as GroupMessage).reply("114514")
-        (context.source.message as PrivateMessage).reply("114514")
+        (context.source.message as GroupMessage)?.reply("114514")
+        (context.source.message as PrivateMessage)?.reply("114514")
     }
     0
 }
