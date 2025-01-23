@@ -74,6 +74,7 @@
 9. 映射服务器名称 - 将velocity的子服名称映射成中文转发到群内
 10. 可选的屏蔽某个子服的聊天消息
 11. 支持绑定QQ群和游戏的ID(需额外购买, +15RMB)
+12. 自定义消息转发模板
 
 ## 指令
 
@@ -117,70 +118,83 @@
 
 ```json
 {
-  // 密钥
-  "secretKey": "<your secret key here>",
-  // 正向Websocket连接地址
-  "wsAddress": "ws://127.0.0.1:8081/ws",
-  "accessToken": "1145141919810",
-  // 表示监听的群聊， 必须是真实存在并且机器人在群内的， 如果你只需要监听一个群的话，那就把其他的全部删掉
-  "groupId": [
-    114514,
-    1919810
-  ],
-  // 表示需要上报的事件， 不需要哪个事件就删除掉哪一行
-  "events": [
-    "PlayerLeaveEvent",
-    // 玩家退出游戏
-    "PlayerJoinEvent",
-    // 玩家加入游戏
-    "PlayerChatEvent",
-    // 玩家聊天消息
-    "GroupMessageEvent",
-    // 从QQ群转发消息
-    "CrossServerMessageEvent"
-    // 跨服聊天消息
-  ],
-  // 权限配置, owner和admins权限一样， others表示没权限， 可以不填
-  "permission": {
-    "owner": 3458671395,
-    "admins": [
+   // 密钥
+   "secretKey": "<your secret key here>",
+   // 正向Websocket连接地址
+   "wsAddress": "ws://127.0.0.1:8081/ws",
+   "accessToken": "1145141919810",
+   // 表示监听的群聊， 必须是真实存在并且机器人在群内的， 如果你只需要监听一个群的话，那就把其他的全部删掉
+   "groupId": [
       114514,
       1919810
-    ],
-    "others": [
-      66666,
-      33343131
-    ]
-  },
-  // 配置RCON
-  "rcons": {
-    // 是否启用RCON， 如果需要操作白名单的话就需要开启并正确配置
-    "enabled": false,
-    "rcons": [
-      {
-        "name": "instance1",
-        "host": "127.0.0.1",
-        "port": 25577,
-        "password": "123456"
-      },
-      {
-        "name": "instance2",
-        "host": "127.0.0.1",
-        "port": 25599,
-        "password": "1919810"
-      }
-    ]
-  },
-  "style": {
-    // 跨服聊天的消息样式， 遵循MiniMessage语法
-    "crossServerMessageStyle": "<green>[{{serverName}}]</green> > [{{playerName}}]: {{message}}",
-    // QQ群转发来的消息的样式， 遵循MiniMessage语法
-    "groupMessageStyle": "<green>[QQ群({{groupName}})]</green> > [{{senderName}}]: {{message}}"
-  },
-  "mcForwardPrefix": "",
-  // 这里是控制以什么前缀开头的消息会被转发到QQ群, 设置成空就是任何消息都会被转发到QQ群
-  "enableTabList": true
-  // 是否开启在Tab列表显示其他子服的玩家
+   ],
+   // 表示需要上报的事件， 不需要哪个事件就删除掉哪一行
+   "events": [
+      "PlayerLeaveEvent",
+      // 玩家退出游戏
+      "PlayerJoinEvent",
+      // 玩家加入游戏
+      "PlayerChatEvent",
+      // 玩家聊天消息
+      "GroupMessageEvent",
+      // 从QQ群转发消息
+      "CrossServerMessageEvent"
+      // 跨服聊天消息
+   ],
+   // 权限配置, owner和admins权限一样， others表示没权限， 可以不填
+   "permission": {
+      "owner": 3458671395,
+      "admins": [
+         114514,
+         1919810
+      ],
+      "others": [
+         66666,
+         33343131
+      ]
+   },
+   // 配置RCON
+   "rcons": {
+      // 是否启用RCON， 如果需要操作白名单的话就需要开启并正确配置
+      "enabled": false,
+      "rcons": [
+         {
+            "name": "instance1",
+            "host": "127.0.0.1",
+            "port": 25577,
+            "password": "123456"
+         },
+         {
+            "name": "instance2",
+            "host": "127.0.0.1",
+            "port": 25599,
+            "password": "1919810"
+         }
+      ]
+   },
+   "style": {
+      // 跨服聊天的消息样式， 遵循MiniMessage语法
+      "crossServerMessageStyle": "<green>[{{serverName}}]</green> > [{{playerName}}]: {{message}}",
+      // QQ群转发来的消息的样式， 遵循MiniMessage语法
+      "groupMessageStyle": "<green>[QQ群({{groupName}})]</green> > [{{senderName}}]: {{message}}"
+   },
+   "mcForwardPrefix": "",
+   // 这里是控制以什么前缀开头的消息会被转发到QQ群, 设置成空就是任何消息都会被转发到QQ群
+   "enableTabList": true,
+   // 是否开启在Tab列表显示其他子服的玩家
+   "enableNicknameAsPlayerCount": true,
+   // 是否在/list指令的返回中添加玩家的皮肤的头， 注意： 开启之后返回消息会变慢，如果人多不要开启
+   "enableListCommandPlayerHeadDisplay": true,
+   // 石头在戳一戳机器人返回的玩家列表中添加玩家的头， 注意： 开启之后返回消息会变慢，如果人多不要开启
+   "enableDoubleTapPlayerHeadDisplay": false,
+   // 设置子服的名称映射
+   "subServerNameMap": {
+      "lobby": "大厅"
+   },
+   // 设置忽略某个子服的聊天信息, 如果需要转发所有的子服的消息，请把lobby删除
+   "ignoreChatServers": [
+      "lobby"
+   ]
 }
 ```
 
