@@ -18,6 +18,12 @@
 
 > 这是一个paper端的插件用于将一个实体"搬"起来
 
+### YeeeesMOTD
+
+[YeeeesMOTD](docs/YeeeesMOTD.md)
+
+> 这是一个多平台的MOTD修改插件可以安装在Bungeecord、Velocity、Spigot、Paper、Purpur、Bukkit、Luminol、Folia、Leaves等服务端上
+
 <hr>
 
 ## 库
