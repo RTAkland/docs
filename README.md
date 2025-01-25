@@ -28,11 +28,6 @@
 
 > 这是一个Kotlin协程OneBot11 SDK
 
-### MVNRepox
-
-[MVNRepo](docs/mvnrepo/MVNRepo.md)
-[MVNRepoAPI](docs/mvnrepo/MVNRepoAPI.md)
-
 <hr>
 
 ## 软件
@@ -40,3 +35,10 @@
 ### Kwsify
 
 [Kwsify](docs/kwsify/kwsify.md)
+
+### MVNRepox
+
+[MVNRepo](docs/mvnrepo/MVNRepo.md)
+[MVNRepoAPI](docs/mvnrepo/MVNRepoAPI.md)
+
+> 这是一个Maven仓库软件
