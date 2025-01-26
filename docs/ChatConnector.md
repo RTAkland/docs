@@ -194,7 +194,9 @@
    // 设置忽略某个子服的聊天信息, 如果需要转发所有的子服的消息，请把lobby删除
    "ignoreChatServers": [
       "lobby"
-   ]
+   ],
+   // 如果开启了使用机器人名字作为在线玩家数的情况下可以设置机器人名字的模板
+   "botNicknameTemplate": "{{botName}} | 在线玩家数: {{onlinePlayerCount}}"
 }
 ```
 
