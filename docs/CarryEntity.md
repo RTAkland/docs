@@ -8,7 +8,7 @@
 
 # 使用
 
-使用/carryentity enable/disable 可以调整自己的开关
+使用`/carryentity enable/disable` 可以调整自己的开关
 
 > 目前只有1.21.1以上的版本能用哦, 如果想使用低版本的话可以联系我+10元我会给出低版本的兼容版
 
