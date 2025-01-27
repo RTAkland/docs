@@ -24,6 +24,12 @@
 
 > 这是一个多平台的MOTD修改插件可以安装在Bungeecord、Velocity、Spigot、Paper、Purpur、Bukkit、Luminol、Folia、Leaves等服务端上
 
+### MobCustomTarget
+
+[MobCustomTarget](docs/MobCustomTarget.md)
+
+> 这是一个可以设置生物的仇恨目标的插件, 可以实现友好生物攻击目标生物, 也能进行大乱斗
+
 <hr>
 
 ## 库
