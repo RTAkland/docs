@@ -205,6 +205,22 @@ fun main() {
     println(operator)
 }
 ```
+## DSL消息构造
+
+> 这一部分是Kotlin特有的调用方式看下面的示例
+
+```kotlin
+fun main() {
+    val msg = messageChain {
+        addText("Hello World")
+        this(Text("1111"))
+        invoke(Text("2222"))
+        +Text("22222")
+        add(Text("22222"))
+    }
+    println(msg)
+}
+```
 
 # 消息即对象
 
