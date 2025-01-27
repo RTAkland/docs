@@ -168,6 +168,25 @@ suspend fun main() {
 
 > 更多Brigadier的用法点[这里](https://github.com/Mojang/brigadier)
 
+## 封装后的命令注册
+
+如果你觉得上面那种方式太复杂还需要写一个类继承后再写指令，你可以选择下面的方式来注册命令
+
+```kotlin
+fun main() {
+    ROneBotFactory.brigadierCommandManager.register(
+        Commands.literal("main")
+            .then(
+                Commands.argument("test", CharArgumentType.char())
+                    .executes {
+                        println(it.getChar("test"))
+                        Command.SINGLE_SUCCESS
+                    }
+            ), listOf("main1", "1111")
+    )
+}
+```
+
 # 消息构造器
 
 ## 链式调用构造消息
