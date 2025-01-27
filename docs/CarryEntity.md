@@ -1,0 +1,11 @@
+# CarryEntity
+
+> 这个插件是可以将一个生物搬起来，安装Shift + 右键一个生物即可将其搬起来，搬起来后按下Shift即可将其放下
+
+# 展示
+
+![CarryEntity](../images/carryentity/carryentity-showse.gif)
+
+# 购买
+
+插件定价为15元， 通过邮件： me@rtast.cn 或 QQ: 3458671395联系我
