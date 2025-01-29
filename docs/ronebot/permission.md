@@ -2,6 +2,29 @@
 
 目前权限控制仅实现了`OneBot11`平台, 你可以在Brigadier和旧版注册的命令中使用
 
+## 添加Maven仓库
+
+```kotlin
+repositories {
+    // RTAST的Maven仓库
+    maven("https://repo.maven.rtast.cn/releases/")
+}
+```
+
+## 添加依赖
+
+```kotlin
+dependencies {
+    // 这里的版本替换成最新版本
+    implementation("cn.rtast:ronebot-permission:${version}")
+}
+```
+
+> 替换成最新版本, 最新版本可以在Gitlab的Maven仓库查看,
+> [这里](https://repo.maven.rtast.cn/#/releases/cn/rtast/ronebot-permission)
+> 是 所有版本的Maven仓库地址尽量使用最新版进行开发~ (你也可以查看仓库的tag, 因为每次有新的tag被推送进仓库就会自动触发Github
+> Actions进行发布包)
+
 # Brigadier 
 
 ```kotlin
