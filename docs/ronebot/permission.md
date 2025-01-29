@@ -1,6 +1,6 @@
 # Permission
 
-目前权限控制近实现了`OneBot11`平台, 你可以在Brigadier和旧版注册的命令中使用
+目前权限控制仅实现了`OneBot11`平台, 你可以在Brigadier和旧版注册的命令中使用
 
 # Brigadier 
 
