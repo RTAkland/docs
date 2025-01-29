@@ -294,7 +294,7 @@ fun main() {
 
 # 权限控制
 
-见[Permission](permission.md)
+见[Permission](docs/ronebot/permission.md)
 
 # 合理使用反射和注解
 
