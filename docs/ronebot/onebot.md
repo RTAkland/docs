@@ -236,6 +236,14 @@ fun main() {
         invoke(Text("2222"))
         +Text("22222")
         add(Text("22222"))
+        // 也可以像下面这样追加消息段
+        text {
+            text = "1111"
+        }
+        image {
+            file = "<这里是base64>"
+            base64 = true
+        }
     }
     println(msg)
 }
