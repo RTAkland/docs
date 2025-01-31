@@ -355,6 +355,27 @@ class HelpCommand : BaseCommand() {
 
 > 现在发送`/help`就可以看到效果了
 
+# 自定义命令拦截器
+
+这个功能可以实现在命令执行之前/之后执行某些代码， 
+需要使用这个功能可以按照下面的方式创建并且注册一个
+自定义Interceptor
+
+```kotlin
+class CustomInterceptor: ExecutionInterceptor() {
+    override suspend fun beforeGroupExecute(message: GroupMessage, command: BaseCommand): CommandExecutionResult {
+        if (xxxx) {
+            return CommandExecutionResult.STOP
+        }
+        return CommandExecutionResult.CONTINUE
+    }
+}
+
+fun main() {
+    ROneBotFactory.interceptor = CustomInterceptor()
+}
+```
+
 ***注意*** 反射是一种耗时的操作需要合理的运用反射才能让程序获得更好的性能
 
 如果你还想自定义指令的名称还可以自己新建一个注解来为你的指令添加自定义指令名
