@@ -249,6 +249,28 @@ fun main() {
 }
 ```
 
+当然也可以使用`json-like`的方式创建一个合并转发消息或者普通消息
+下面是合并转发消息的用法
+
+```kotlin
+val node = nodeMessageChain {
+    messageChain(3458671395) {
+        text("1111")
+        text {
+            text = 1
+        }
+        text {
+            text = 2
+        }
+    }
+    messageChain(3458671395) {
+        text("2222")
+    }
+}
+```
+
+> 普通的消息就只需要去除外面一层的`nodeMessageChain`即可
+
 # 消息即对象
 
 > 你可以对一个消息对象执行某些操作例如 撤回(revoke/recall) 回复(reply)
