@@ -221,7 +221,7 @@
 !> 请通过[邮件](mailto:buy@rtast.cn)联系我并进行购买，我会尽可能快的回复您的消息 。 也可以直接通过QQ联系我 `3458671395`。
 本插件定价暂时为 `20元(RMB)`。
 
-![qrc](https://static.rtast.cn/static/cf5bda906d40a7addf28bca8f82877db.png)
+<img src="https://static.rtast.cn/static/cf5bda906d40a7addf28bca8f82877db.png" width="250">
 
 > 如果你选择先付款而不是先沟通那我默认就认为你知道上面的售出不退, 付完款就加我QQ联系，然后告诉我你的
 > 微信名字
