@@ -73,8 +73,7 @@
 8. 戳一戳机器人快速获取在线玩家列表
 9. 映射服务器名称 - 将velocity的子服名称映射成中文转发到群内
 10. 可选的屏蔽某个子服的聊天消息
-11. 支持绑定QQ群和游戏的ID(需额外购买, +15RMB)
-12. 自定义消息转发模板
+11. 自定义消息转发模板
 
 ## 指令
 
@@ -194,7 +193,9 @@
    // 设置忽略某个子服的聊天信息, 如果需要转发所有的子服的消息，请把lobby删除
    "ignoreChatServers": [
       "lobby"
-   ]
+   ],
+   // 如果开启了使用机器人名字作为在线玩家数的情况下可以设置机器人名字的模板
+   "botNicknameTemplate": "{{botName}} | 在线玩家数: {{onlinePlayerCount}}"
 }
 ```
 
@@ -202,86 +203,26 @@
 
 # 注
 
+!> 售出不退！
+
 !> 因为QQ官方机器人API限制了主动发送消息次数(每个月限制4条消息)，所以暂时不支持QQ官方机器人API消息处理器
 
 !> 本插件支持多群组互通即: 多对一 (两个以上QQ群转发MC内的消息, MC的消息转发到所有QQ群), 但是不支持不同平台的消息监听
 
-!> 如果想要增加新的功能，则需要加价最少20元，会按照难度来决定是否增加这个价格
+!> 如果想要增加新的功能，可以联系我获取报价
 
 !> 如果你非常非常懒一点都不想自己配置，那你需要额外付15元作为技术费，
 !> 我会全程帮你部署所有的东西, 如果你只是有一小部分不懂或者不会那么我会考虑免费帮你
+
+!> 插件有密钥验证如果不加密钥直接启动的话会直接导致velocity退出！ 并且一个密钥只能有一个客户端同时在线
 
 # 购买
 
 !> 请通过[邮件](mailto:buy@rtast.cn)联系我并进行购买，我会尽可能快的回复您的消息 。 也可以直接通过QQ联系我 `3458671395`。
 本插件定价暂时为 `20元(RMB)`。
 
-# 许可协议
+<img src="https://static.rtast.cn/static/cf5bda906d40a7addf28bca8f82877db.png" width="250">
 
-本项目使用CLA协议, 即:
+> 如果你选择先付款而不是先沟通那我默认就认为你知道上面的售出不退, 付完款就加我QQ联系，然后告诉我你的
+> 微信名字
 
-- 明确禁止反编译、分发等行为。
-- 声明软件的知识产权归我所有。
-- 免责声明，软件按现状提供。
-- 这是双方之间的完整协议。
-
-> 下方是CLA协议文件原文
-
-```license
-Commercial License Agreement
-
-This Commercial License Agreement (the "Agreement") is entered into as of [Date] by and
-between [Your Name or Your Company Name] (the "Licensor") and [Licensee's Name] (the "Licensee").
-
-1. Grant of License
-
-Licensor hereby grants Licensee a non-exclusive, non-transferable, revocable license to use the software product known
-as [Your Software Name] (the "Software") for [Purpose of Use, e.g., personal use, internal business use] under the terms
-of this Agreement.
-
-2. Restrictions
-
-Licensee shall not:
-
-Decompile, reverse engineer, disassemble, or otherwise attempt to derive the source code of the Software.
-Modify, adapt, or create derivative works based on the Software.
-Distribute, sell, lease, or sublicense the Software or any part thereof to any third party.
-Use the Software in any manner that violates applicable laws or regulations.
-
-3. Ownership
-
-Licensor retains all rights, title, and interest in and to the Software, including all intellectual property rights.
-
-4. Term and Termination
-
-This Agreement shall commence on the date first written above and continue until terminated by either party. Licensor
-may terminate this Agreement immediately if Licensee breaches any terms of this Agreement. Upon termination, Licensee
-shall cease all use of the Software and destroy all copies in their possession.
-
-5. No Warranty
-
-The Software is provided "as is," without warranty of any kind, express or implied, including but not limited to the
-warranties of merchantability or fitness for a particular purpose.
-
-6. Limitation of Liability
-
-Licensor shall not be liable for any damages arising from the use of or inability to use the Software, including but not
-limited to consequential, incidental, or punitive damages.
-
-7. Governing Law
-
-This Agreement shall be governed by and construed in accordance with the laws of [Your State/Country].
-
-8. Entire Agreement
-
-This Agreement constitutes the entire agreement between the parties and supersedes all prior agreements and
-understandings with respect to the subject matter hereof.
-
-IN WITNESS WHEREOF, the parties have executed this Commercial License Agreement as of the date first written above.
-
-Licensor:
-Name: [RTAkland]
-
-Licensee:
-Name: [CLA]
-```

@@ -168,6 +168,25 @@ suspend fun main() {
 
 > 更多Brigadier的用法点[这里](https://github.com/Mojang/brigadier)
 
+## 封装后的命令注册
+
+如果你觉得上面那种方式太复杂还需要写一个类继承后再写指令，你可以选择下面的方式来注册命令
+
+```kotlin
+fun main() {
+    ROneBotFactory.brigadierCommandManager.register(
+        Commands.literal("main")
+            .then(
+                Commands.argument("test", CharArgumentType.char())
+                    .executes {
+                        println(it.getChar("test"))
+                        Command.SINGLE_SUCCESS
+                    }
+            ), listOf("main1", "1111")
+    )
+}
+```
+
 # 消息构造器
 
 ## 链式调用构造消息
@@ -205,6 +224,52 @@ fun main() {
     println(operator)
 }
 ```
+## DSL消息构造
+
+> 这一部分是Kotlin特有的调用方式看下面的示例
+
+```kotlin
+fun main() {
+    val msg = messageChain {
+        addText("Hello World")
+        this(Text("1111"))
+        invoke(Text("2222"))
+        +Text("22222")
+        add(Text("22222"))
+        // 也可以像下面这样追加消息段
+        text {
+            text = "1111"
+        }
+        image {
+            file = "<这里是base64>"
+            base64 = true
+        }
+    }
+    println(msg)
+}
+```
+
+当然也可以使用`json-like`的方式创建一个合并转发消息或者普通消息
+下面是合并转发消息的用法
+
+```kotlin
+val node = nodeMessageChain {
+    messageChain(3458671395) {
+        text("1111")
+        text {
+            text = 1
+        }
+        text {
+            text = 2
+        }
+    }
+    messageChain(3458671395) {
+        text("2222")
+    }
+}
+```
+
+> 普通的消息就只需要去除外面一层的`nodeMessageChain`即可
 
 # 消息即对象
 
@@ -215,7 +280,7 @@ fun main() {
     ROneBotFactory.createClient("ws://127.0.0.1:6666", "1145141919810", object : OneBotListener {
         override suspend fun onGroupMessage(message: GroupMessage, json: String) {
             message.revoke(10)  // 延迟10秒后撤回这条消息
-            // 你可以在任何事件回调接口中访问`action`这个对象, 例如下面的示例
+            // 你可以在任何事件对象中访问`action`, 例如下面的示例
             println(message.action.getLoginInfo())
         }
     })
@@ -256,6 +321,10 @@ fun main() {
     })
 }
 ```
+
+# 权限控制
+
+见[Permission](docs/ronebot/permission.md)
 
 # 合理使用反射和注解
 
@@ -307,6 +376,27 @@ class HelpCommand : BaseCommand() {
 ```
 
 > 现在发送`/help`就可以看到效果了
+
+# 自定义命令拦截器
+
+这个功能可以实现在命令执行之前/之后执行某些代码， 
+需要使用这个功能可以按照下面的方式创建并且注册一个
+自定义Interceptor
+
+```kotlin
+class CustomInterceptor: ExecutionInterceptor() {
+    override suspend fun beforeGroupExecute(message: GroupMessage, command: BaseCommand): CommandExecutionResult {
+        if (xxxx) {
+            return CommandExecutionResult.STOP
+        }
+        return CommandExecutionResult.CONTINUE
+    }
+}
+
+fun main() {
+    ROneBotFactory.interceptor = CustomInterceptor()
+}
+```
 
 ***注意*** 反射是一种耗时的操作需要合理的运用反射才能让程序获得更好的性能
 

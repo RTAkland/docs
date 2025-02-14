@@ -12,6 +12,12 @@
 
 > 这是一个Velocity的群服互通插件, 并且支持许多额外的功能, 例如远程执行命令、游戏内快速且回复群内的消息等
 
+### YeeeesMOTD
+
+[YeeeesMOTD](docs/YeeeesMOTD.md)
+
+> 这是一个多平台的MOTD修改插件可以安装在Bungeecord、Velocity、Spigot、Paper、Purpur、Bukkit、Luminol、Folia、Leaves等服务端上
+
 <hr>
 
 ## 库
