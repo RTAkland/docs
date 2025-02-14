@@ -12,12 +12,6 @@
 
 > 这是一个Velocity的群服互通插件, 并且支持许多额外的功能, 例如远程执行命令、游戏内快速且回复群内的消息等
 
-### CarryEntity
-
-[CarryEntity](docs/CarryEntity.md)
-
-> 这是一个paper端的插件用于将一个实体"搬"起来
-
 <hr>
 
 ## 库
