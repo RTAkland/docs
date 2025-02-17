@@ -115,31 +115,14 @@
 
 ## 配置
 
-```json
+```json5
 {
    // 密钥
    "secretKey": "<your secret key here>",
    // 正向Websocket连接地址
    "wsAddress": "ws://127.0.0.1:8081/ws",
+   // 正向ws的token
    "accessToken": "1145141919810",
-   // 表示监听的群聊， 必须是真实存在并且机器人在群内的， 如果你只需要监听一个群的话，那就把其他的全部删掉
-   "groupId": [
-      114514,
-      1919810
-   ],
-   // 表示需要上报的事件， 不需要哪个事件就删除掉哪一行
-   "events": [
-      "PlayerLeaveEvent",
-      // 玩家退出游戏
-      "PlayerJoinEvent",
-      // 玩家加入游戏
-      "PlayerChatEvent",
-      // 玩家聊天消息
-      "GroupMessageEvent",
-      // 从QQ群转发消息
-      "CrossServerMessageEvent"
-      // 跨服聊天消息
-   ],
    // 权限配置, owner和admins权限一样， others表示没权限， 可以不填
    "permission": {
       "owner": 3458671395,
@@ -158,9 +141,13 @@
       "enabled": false,
       "rcons": [
          {
+            // 名称必须唯一
             "name": "instance1",
+            // rcon的主机名
             "host": "127.0.0.1",
+            // rcon的端口号
             "port": 25577,
+            // rcon的密码
             "password": "123456"
          },
          {
@@ -195,24 +182,59 @@
       "lobby"
    ],
    // 如果开启了使用机器人名字作为在线玩家数的情况下可以设置机器人名字的模板
-   "botNicknameTemplate": "{{botName}} | 在线玩家数: {{onlinePlayerCount}}"
+   "botNicknameTemplate": "{{botName}} | 在线玩家数: {{onlinePlayerCount}}",
+   // 表示是否开启跨服聊天
+   "enableCrossServerChat": true,
+   // 设置help命令返回的格式, 默认是以图片返回, 可以改成Text来将其改为纯文本
+   "helpCommandResponseType": "Image",
+   // 每个群组的设置, 可以有多个, 只需要复制粘贴一下就行
+   "groupsSettings": {
+      // 群号
+      "114514": {
+         // 表示需要上报的事件， 不需要哪个事件就删除掉哪一行
+         "events": [
+            // 玩家退出游戏
+            "PlayerLeaveEvent",
+            // 玩家加入游戏
+            "PlayerJoinEvent",
+            // 玩家聊天消息
+            "PlayerChatEvent",
+            // 从QQ群转发消息
+            "GroupMessageEvent",
+         ],
+         // 设置群聊的消息以什么开头才会被转发进mc, 默认为全部消息都转发
+         "groupForwardPrefix": "",
+         // 设置每个命令在这个群的开关, 设置成false则表示这个群禁用这个命令
+         "commandEnableStatus": {
+            "help": true,
+            "list": true,
+            "exec": true,
+            "status": true,
+            "at": true,
+            "wh": true,
+            "rec": true
+         },
+         // 设置每个命令在这个群需要的权限
+         "commandPermission": {
+            "help": "Normal",
+            "list": "Normal",
+            "exec": "Admin",
+            "status": "Normal",
+            "at": "Normal",
+            "wh": "Admin",
+            "rec": "Admin"
+         }
+      }
+   },
 }
 ```
-
 这是默认的配置文件, 你可以按需修改, 如果不知道怎么配置的话可以联系我帮忙配置
 
 # 注
 
 !> 售出不退！
 
-!> 因为QQ官方机器人API限制了主动发送消息次数(每个月限制4条消息)，所以暂时不支持QQ官方机器人API消息处理器
-
-!> 本插件支持多群组互通即: 多对一 (两个以上QQ群转发MC内的消息, MC的消息转发到所有QQ群), 但是不支持不同平台的消息监听
-
 !> 如果想要增加新的功能，可以联系我获取报价
-
-!> 如果你非常非常懒一点都不想自己配置，那你需要额外付15元作为技术费，
-!> 我会全程帮你部署所有的东西, 如果你只是有一小部分不懂或者不会那么我会考虑免费帮你
 
 !> 插件有密钥验证如果不加密钥直接启动的话会直接导致velocity退出！ 并且一个密钥只能有一个客户端同时在线
 
