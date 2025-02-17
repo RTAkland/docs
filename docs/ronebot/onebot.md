@@ -280,7 +280,7 @@ fun main() {
     ROneBotFactory.createClient("ws://127.0.0.1:6666", "1145141919810", object : OneBotListener {
         override suspend fun onGroupMessage(message: GroupMessage, json: String) {
             message.revoke(10)  // 延迟10秒后撤回这条消息
-            // 你可以在任何事件回调接口中访问`action`这个对象, 例如下面的示例
+            // 你可以在任何事件对象中访问`action`, 例如下面的示例
             println(message.action.getLoginInfo())
         }
     })
