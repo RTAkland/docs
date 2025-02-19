@@ -117,117 +117,118 @@
 
 ```json5
 {
-   // 密钥
-   "secretKey": "<your secret key here>",
-   // 正向Websocket连接地址
-   "wsAddress": "ws://127.0.0.1:8081/ws",
-   // 正向ws的token
-   "accessToken": "1145141919810",
-   // 权限配置, owner和admins权限一样， others表示没权限， 可以不填
-   "permission": {
-      "owner": 3458671395,
-      "admins": [
-         114514,
-         1919810
-      ],
-      "others": [
-         66666,
-         33343131
-      ]
-   },
-   // 配置RCON
-   "rcons": {
-      // 是否启用RCON， 如果需要操作白名单的话就需要开启并正确配置
-      "enabled": false,
-      "rcons": [
-         {
-            // 名称必须唯一
-            "name": "instance1",
-            // rcon的主机名
-            "host": "127.0.0.1",
-            // rcon的端口号
-            "port": 25577,
-            // rcon的密码
-            "password": "123456"
-         },
-         {
-            "name": "instance2",
-            "host": "127.0.0.1",
-            "port": 25599,
-            "password": "1919810"
-         }
-      ]
-   },
-   "style": {
-      // 跨服聊天的消息样式， 遵循MiniMessage语法
-      "crossServerMessageStyle": "<green>[{{serverName}}]</green> > [{{playerName}}]: {{message}}",
-      // QQ群转发来的消息的样式， 遵循MiniMessage语法
-      "groupMessageStyle": "<green>[QQ群({{groupName}})]</green> > [{{senderName}}]: {{message}}"
-   },
-   "mcForwardPrefix": "",
-   // 这里是控制以什么前缀开头的消息会被转发到QQ群, 设置成空就是任何消息都会被转发到QQ群
-   "enableTabList": true,
-   // 是否开启在Tab列表显示其他子服的玩家
-   "enableNicknameAsPlayerCount": true,
-   // 是否在/list指令的返回中添加玩家的皮肤的头， 注意： 开启之后返回消息会变慢，如果人多不要开启
-   "enableListCommandPlayerHeadDisplay": true,
-   // 石头在戳一戳机器人返回的玩家列表中添加玩家的头， 注意： 开启之后返回消息会变慢，如果人多不要开启
-   "enableDoubleTapPlayerHeadDisplay": false,
-   // 设置子服的名称映射
-   "subServerNameMap": {
-      "lobby": "大厅"
-   },
-   // 设置忽略某个子服的聊天信息, 如果需要转发所有的子服的消息，请把lobby删除
-   "ignoreChatServers": [
-      "lobby"
-   ],
-   // 如果开启了使用机器人名字作为在线玩家数的情况下可以设置机器人名字的模板
-   "botNicknameTemplate": "{{botName}} | 在线玩家数: {{onlinePlayerCount}}",
-   // 表示是否开启跨服聊天
-   "enableCrossServerChat": true,
-   // 设置help命令返回的格式, 默认是以图片返回, 可以改成Text来将其改为纯文本
-   "helpCommandResponseType": "Image",
-   // 每个群组的设置, 可以有多个, 只需要复制粘贴一下就行
-   "groupsSettings": {
-      // 群号
-      "114514": {
-         // 表示需要上报的事件， 不需要哪个事件就删除掉哪一行
-         "events": [
-            // 玩家退出游戏
-            "PlayerLeaveEvent",
-            // 玩家加入游戏
-            "PlayerJoinEvent",
-            // 玩家聊天消息
-            "PlayerChatEvent",
-            // 从QQ群转发消息
-            "GroupMessageEvent",
-         ],
-         // 设置群聊的消息以什么开头才会被转发进mc, 默认为全部消息都转发
-         "groupForwardPrefix": "",
-         // 设置每个命令在这个群的开关, 设置成false则表示这个群禁用这个命令
-         "commandEnableStatus": {
-            "help": true,
-            "list": true,
-            "exec": true,
-            "status": true,
-            "at": true,
-            "wh": true,
-            "rec": true
-         },
-         // 设置每个命令在这个群需要的权限
-         "commandPermission": {
-            "help": "Normal",
-            "list": "Normal",
-            "exec": "Admin",
-            "status": "Normal",
-            "at": "Normal",
-            "wh": "Admin",
-            "rec": "Admin"
-         }
+  // 密钥
+  "secretKey": "<your secret key here>",
+  // 正向Websocket连接地址
+  "wsAddress": "ws://127.0.0.1:8081/ws",
+  // 正向ws的token
+  "accessToken": "1145141919810",
+  // 权限配置, owner和admins权限一样， others表示没权限， 可以不填
+  "permission": {
+    "owner": 3458671395,
+    "admins": [
+      114514,
+      1919810
+    ],
+    "others": [
+      66666,
+      33343131
+    ]
+  },
+  // 配置RCON
+  "rcons": {
+    // 是否启用RCON， 如果需要操作白名单的话就需要开启并正确配置
+    "enabled": false,
+    "rcons": [
+      {
+        // 名称必须唯一
+        "name": "instance1",
+        // rcon的主机名
+        "host": "127.0.0.1",
+        // rcon的端口号
+        "port": 25577,
+        // rcon的密码
+        "password": "123456"
+      },
+      {
+        "name": "instance2",
+        "host": "127.0.0.1",
+        "port": 25599,
+        "password": "1919810"
       }
-   },
+    ]
+  },
+  "style": {
+    // 跨服聊天的消息样式， 遵循MiniMessage语法
+    "crossServerMessageStyle": "<green>[{{serverName}}]</green> > [{{playerName}}]: {{message}}",
+    // QQ群转发来的消息的样式， 遵循MiniMessage语法
+    "groupMessageStyle": "<green>[QQ群({{groupName}})]</green> > [{{senderName}}]: {{message}}"
+  },
+  "mcForwardPrefix": "",
+  // 这里是控制以什么前缀开头的消息会被转发到QQ群, 设置成空就是任何消息都会被转发到QQ群
+  "enableTabList": true,
+  // 是否开启在Tab列表显示其他子服的玩家
+  "enableNicknameAsPlayerCount": true,
+  // 是否在/list指令的返回中添加玩家的皮肤的头， 注意： 开启之后返回消息会变慢，如果人多不要开启
+  "enableListCommandPlayerHeadDisplay": true,
+  // 石头在戳一戳机器人返回的玩家列表中添加玩家的头， 注意： 开启之后返回消息会变慢，如果人多不要开启
+  "enableDoubleTapPlayerHeadDisplay": false,
+  // 设置子服的名称映射
+  "subServerNameMap": {
+    "lobby": "大厅"
+  },
+  // 设置忽略某个子服的聊天信息, 如果需要转发所有的子服的消息，请把lobby删除
+  "ignoreChatServers": [
+    "lobby"
+  ],
+  // 如果开启了使用机器人名字作为在线玩家数的情况下可以设置机器人名字的模板
+  "botNicknameTemplate": "{{botName}} | 在线玩家数: {{onlinePlayerCount}}",
+  // 表示是否开启跨服聊天
+  "enableCrossServerChat": true,
+  // 设置help命令返回的格式, 默认是以图片返回, 可以改成Text来将其改为纯文本
+  "helpCommandResponseType": "Image",
+  // 每个群组的设置, 可以有多个, 只需要复制粘贴一下就行
+  "groupsSettings": {
+    // 群号
+    "114514": {
+      // 表示需要上报的事件， 不需要哪个事件就删除掉哪一行
+      "events": [
+        // 玩家退出游戏
+        "PlayerLeaveEvent",
+        // 玩家加入游戏
+        "PlayerJoinEvent",
+        // 玩家聊天消息
+        "PlayerChatEvent",
+        // 从QQ群转发消息
+        "GroupMessageEvent",
+      ],
+      // 设置群聊的消息以什么开头才会被转发进mc, 默认为全部消息都转发
+      "groupForwardPrefix": "",
+      // 设置每个命令在这个群的开关, 设置成false则表示这个群禁用这个命令
+      "commandEnableStatus": {
+        "help": true,
+        "list": true,
+        "exec": true,
+        "status": true,
+        "at": true,
+        "wh": true,
+        "rec": true
+      },
+      // 设置每个命令在这个群需要的权限
+      "commandPermission": {
+        "help": "Normal",
+        "list": "Normal",
+        "exec": "Admin",
+        "status": "Normal",
+        "at": "Normal",
+        "wh": "Admin",
+        "rec": "Admin"
+      }
+    }
+  },
 }
 ```
+
 这是默认的配置文件, 你可以按需修改, 如果不知道怎么配置的话可以联系我帮忙配置
 
 # 注
@@ -240,6 +241,19 @@
 
 # 购买
 
+插件有两种购买方式
+
+1. 通过工作室官网购买(这种方式更快捷, 一般会在几分钟内就会收到插件和密钥并且以后如果密钥忘记了可以找回)
+2. 直接通过微信转账后加我QQ联系
+
+推荐使用第一种购买方式
+
+## 工作室官网购买
+
+https://studio.yhdzz.cn/shop/1843.html
+
+## 通过微信转账购买
+
 !> 请通过[邮件](mailto:buy@rtast.cn)联系我并进行购买，我会尽可能快的回复您的消息 。 也可以直接通过QQ联系我 `3458671395`。
 本插件定价暂时为 `20元(RMB)`。
 
@@ -247,4 +261,3 @@
 
 > 如果你选择先付款而不是先沟通那我默认就认为你知道上面的售出不退, 付完款就加我QQ联系，然后告诉我你的
 > 微信名字
-
