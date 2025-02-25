@@ -24,7 +24,7 @@ dependencies {
 }
 ```
 
-> 替换成最新版本, 最新版本可以在Gitlab的Maven仓库查看,
+> 替换成最新版本, 最新版本可以在Maven仓库查看,
 > [这里](https://repo.maven.rtast.cn/#/releases/cn/rtast/ronebot-onebot-v11)
 > 是 所有版本的Maven仓库地址尽量使用最新版进行开发~ (你也可以查看仓库的tag, 因为每次有新的tag被推送进仓库就会自动触发Github
 > Actions进行发布包)
