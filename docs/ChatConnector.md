@@ -4,7 +4,7 @@
 
 <h2>ChatConnector</h2>
 
-<h3>⭐一个可以互通QQMC消息以及子服消息同步的Velocity插件⭐</h3>
+<h3>⭐一个可以互通QQMC消息以及子服消息同步的 Velocity/Paper/Fabric 插件/模组⭐</h3>
 
 <img src="https://img.shields.io/badge/OneBot-v11-black?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHAAAABwCAMAAADxPgR5AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAAxQTFRF////29vbr6+vAAAAk1hCcwAAAAR0Uk5T////AEAqqfQAAAKcSURBVHja7NrbctswDATQXfD//zlpO7FlmwAWIOnOtNaTM5JwDMa8E+PNFz7g3waJ24fviyDPgfhz8fHP39cBcBL9KoJbQUxjA2iYqHL3FAnvzhL4GtVNUcoSZe6eSHizBcK5LL7dBr2AUZlev1ARRHCljzRALIEog6H3U6bCIyqIZdAT0eBuJYaGiJaHSjmkYIZd+qSGWAQnIaz2OArVnX6vrItQvbhZJtVGB5qX9wKqCMkb9W7aexfCO/rwQRBzsDIsYx4AOz0nhAtWu7bqkEQBO0Pr+Ftjt5fFCUEbm0Sbgdu8WSgJ5NgH2iu46R/o1UcBXJsFusWF/QUaz3RwJMEgngfaGGdSxJkE/Yg4lOBryBiMwvAhZrVMUUvwqU7F05b5WLaUIN4M4hRocQQRnEedgsn7TZB3UCpRrIJwQfqvGwsg18EnI2uSVNC8t+0QmMXogvbPg/xk+Mnw/6kW/rraUlvqgmFreAA09xW5t0AFlHrQZ3CsgvZm0FbHNKyBmheBKIF2cCA8A600aHPmFtRB1XvMsJAiza7LpPog0UJwccKdzw8rdf8MyN2ePYF896LC5hTzdZqxb6VNXInaupARLDNBWgI8spq4T0Qb5H4vWfPmHo8OyB1ito+AysNNz0oglj1U955sjUN9d41LnrX2D/u7eRwxyOaOpfyevCWbTgDEoilsOnu7zsKhjRCsnD/QzhdkYLBLXjiK4f3UWmcx2M7PO21CKVTH84638NTplt6JIQH0ZwCNuiWAfvuLhdrcOYPVO9eW3A67l7hZtgaY9GZo9AFc6cryjoeFBIWeU+npnk/nLE0OxCHL1eQsc1IciehjpJv5mqCsjeopaH6r15/MrxNnVhu7tmcslay2gO2Z1QfcfX0JMACG41/u0RrI9QAAAABJRU5ErkJggg==">
 <img src="https://img.shields.io/badge/Kotlin-2.0.10-pink?logo=kotlin">
@@ -113,6 +113,125 @@
 6. !!status 获取服务器状态
 7. !!wh <on | off | add | remove> [玩家名] 操作白名单
 
+# 配置
+
+> 下面是默认的配置
+
+```json5
+{
+   // 密钥
+   "secretKey": "<your secret key here>",
+   // 正向ws地址
+   "wsAddress": "ws://127.0.0.1:8081/ws",
+   // ws密钥
+   "accessToken": "1145141919810",
+   // 权限管理
+   "permission": {
+      // owner只能填一个
+      "owner": 3458671395,
+      // admins可以填多个
+      "admins": [
+         114514,
+         1919810
+      ],
+      // other可以不用管， 因为所有没在admins或者owner内的qq号默默人都是other
+      "others": [
+         66666,
+         33343131
+      ]
+   },
+   // rcon配置 此项仅在velocity生效, fabric/paper平台不需要管
+   "rcons": {
+      "enabled": false,
+      "rcons": [
+         {
+            // 实例的名字
+            "name": "instance1",
+            "host": "127.0.0.1",
+            "port": 25577,
+            "password": "123456"
+         },
+         {
+            "name": "instance2",
+            "host": "127.0.0.1",
+            "port": 25599,
+            "password": "1919810"
+         }
+      ]
+   },
+   // 消息转发样式支持adventure-text语法
+   "style": {
+      // 跨服聊天样式, 仅在velocity平台生效
+      "crossServerMessageStyle": "<green>[{{serverName}}]</green> > [{{playerName}}]: {{message}}",
+      // 群聊的消息转发到游戏内的样式
+      "groupMessageStyle": "<green>[QQ群({{groupName}})]</green> > [{{senderName}}]: {{message}}",
+      // mc的消息转发到群聊中的样式， 不支持adventure-text语法
+      "mcMessageStyle": "[MC:{{serverName}}] > [{{playerName}}]: {{message}}"
+   },
+   // 配置只有以什么开头的消息才会转发， 为空则表示转发全部的消息
+   "mcForwardPrefix": "",
+   // 是否开启tab列表显示其他子服的玩家， 仅在velocity平台生效
+   "enableTabList": false,
+   // 是否开启将机器人的名字作为显示在线玩家数的载体
+   "enableNicknameAsPlayerCount": true,
+   // 是否开启/list指令中是否添加玩家的皮肤的头在消息内
+   "enableListCommandPlayerHeadDisplay": true,
+   // 是否开启戳一戳返回的玩家列表是否添加玩家的皮肤的头在消息内
+   "enableDoubleTapPlayerHeadDisplay": false,
+   // 子服名称映射，仅在velocity平台生效
+   "subServerNameMap": {
+      "lobby": "大厅"
+   },
+   // 忽略某个子服的消息，这里的名称需要填velocity.toml内的子服名称， 仅在velocity平台生效
+   "ignoreChatServers": [],
+   // 如果开启了使用bot名称作为玩家数的载体则可以配置此项来自定义名字的样式， 不支持adventure-text语法
+   "botNicknameTemplate": "{{botName}} | 在线玩家数: {{onlinePlayerCount}}",
+   // /help指令的回复格式， Image为图片, Text为纯文本
+   "helpCommandResponseType": "Image",
+   // 针对不同的qq群来配置
+   "groupsSettings": {
+      // 114514是群号
+      "114514": {
+         // 配置针对本群的事件通知
+         "events": [
+            // 玩家离开服务器
+            "PlayerLeaveEvent",
+            // 玩家加入服务器
+            "PlayerJoinEvent",
+            // 玩家聊天信息
+            "PlayerChatEvent",
+            // 群聊聊天信息
+            "GroupMessageEvent"
+         ],
+         // 设置只有群聊的消息以某个子服开头才会被转发， 默认全部转发
+         "groupForwardPrefix": "",
+         // 配置本群的指令开启状态
+         "commandEnableStatus": {
+            "help": true,
+            "list": true,
+            "exec": true,
+            "status": true,
+            "at": true,
+            "wh": true,
+            "rec": true
+         },
+         // 配置本群的指令权限管理
+         "commandPermission": {
+            "help": "Normal",
+            "list": "Normal",
+            "exec": "Admin",
+            "status": "Normal",
+            "at": "Normal",
+            "wh": "Admin",
+            "rec": "Admin"
+         }
+      }
+   },
+   // 是否开启跨服聊天
+   "enableCrossServerChat": true
+}
+```
+
 # 注
 
 !> 售出不退！
@@ -137,7 +256,6 @@
 
 > 如果你选择先付款而不是先沟通那我默认就认为你知道上面的售出不退, 付完款就加我QQ联系，然后告诉我你的
 > 微信名字
-
 
 ## 工作室官网购买
 
