@@ -224,6 +224,7 @@ fun main() {
     println(operator)
 }
 ```
+
 ## DSL消息构造
 
 > 这一部分是Kotlin特有的调用方式看下面的示例
@@ -377,14 +378,20 @@ class HelpCommand : BaseCommand() {
 
 > 现在发送`/help`就可以看到效果了
 
+
+***注意*** 反射是一种耗时的操作需要合理的运用反射才能让程序获得更好的性能
+
+如果你还想自定义指令的名称还可以自己新建一个注解来为你的指令添加自定义指令名
+只需要修改构造消息的部分就可以完成
+
 # 自定义命令拦截器
 
-这个功能可以实现在命令执行之前/之后执行某些代码， 
+这个功能可以实现在命令执行之前/之后执行某些代码，
 需要使用这个功能可以按照下面的方式创建并且注册一个
 自定义Interceptor
 
 ```kotlin
-class CustomInterceptor: ExecutionInterceptor() {
+class CustomInterceptor : ExecutionInterceptor() {
     override suspend fun beforeGroupExecute(message: GroupMessage, command: BaseCommand): CommandExecutionResult {
         if (xxxx) {
             return CommandExecutionResult.STOP
@@ -398,7 +405,23 @@ fun main() {
 }
 ```
 
-***注意*** 反射是一种耗时的操作需要合理的运用反射才能让程序获得更好的性能
+# 消息序列化器
 
-如果你还想自定义指令的名称还可以自己新建一个注解来为你的指令添加自定义指令名
-只需要修改构造消息的部分就可以完成
+> 对一个`List<ArrayMessage>`列表使用`.serialize()`方法可以将其序列化成具体的消息段数据类对象
+
+```kotlin
+class TestClient : OneBotListener {
+    override suspend fun onGroupMessage(message: GroupMessage, json: String) {
+        // 或者使用`.toSegments()`方法
+        message.message.serialize().apply {
+            // has 方法用于判断消息段列表是否有某种消息段类型
+            println(has(TextSegment::class))
+        }.forEach {
+            // 使用 is 关键字智能类型转换为具体的消息段类型
+            if (it is TextSegment) {
+                println(it.text)
+            }
+        }
+    }
+}
+```
