@@ -64,6 +64,50 @@ fun main() {
 }
 ```
 
+# 监听事件
+
+ROB有两种事件分发系统
+
+1. 实现`OneBotListener`
+2. EventBus
+
+> 从v2.8.0版本开始添加了`EventBus`事件分发系统, 你可以更方便的通过函数式编程的方式来监听事件
+
+## 实现OneBotListener
+
+```kotlin
+class TestClient : OneBotListener {
+    override suspend fun onGroupMessage(message: GroupMessage, json: String) {
+        println(message)
+    }
+
+    override suspend fun onWebsocketErrorEvent(event: IWebsocketErrorEvent) {
+        event.exception.printStackTrace()
+    }
+
+    // 重写其他你想要监听的方法
+}
+```
+
+## EventBus
+
+这种方法所有的事件Events在
+[https://github.com/RTAkland/ROneBot/tree/main/ronebot-onebot-v11/src/main/kotlin/cn/rtast/rob/event/events](https://github.com/RTAkland/ROneBot/tree/main/ronebot-onebot-v11/src/main/kotlin/cn/rtast/rob/event/events)
+文件夹内
+
+```kotlin
+// 首先你需要创建一个Bot实例
+fun main() {
+    val bot = ROneBotFactory.createClient(...)
+    // onEvent方法需要传入一个泛型参数, 泛型类型就是上面
+    // 文件夹内的类形, 所有的Event都附带一个action对象
+    // 可以对Bot进行操作
+    bot.onEvent<GroupMessageEvent> {
+        println(it.action.getLoginInfo())
+        println(it.message) // GroupMessage
+    }
+}
+
 # 内置指令管理器
 
 > 内置的指令管理器可以处理 `指令别名` 即多个指令名指向一个指令,
