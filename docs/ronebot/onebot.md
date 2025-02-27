@@ -107,6 +107,7 @@ fun main() {
         println(it.message) // GroupMessage
     }
 }
+```
 
 # 内置指令管理器
 
