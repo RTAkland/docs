@@ -232,6 +232,38 @@ fun main() {
 }
 ```
 
+# 函数式命令处理器
+
+这种方式可以让你更快速、简单的创建一个指令
+
+```kotlin
+// 注解内传入Array<String>用于表示命令的别名
+@GroupCommandHandler(["/test"])
+suspend fun testCommand(message: GroupMessage) {
+    println(message)
+}
+
+@PrivateCommandHandler(["/t1"])
+suspend fun privateCommand(message: PrivateMessage) {
+    println(message)
+}
+```
+
+> 这是群聊和私聊的指令实现方法, 你还需要注册这两个命令
+
+```kotlin
+fun main() {
+    // 使用双冒号引用这个函数
+    ROneBotFactory.commandManager.registerFunction(::testCommand)
+    ROneBotFactory.commandManager.registerFunction(::privateCommand)
+}
+```
+
+## 注意
+
+> 这种方式使用到了反射来调用函数, 
+> 如果你的Bot大量使用到了这种方式请考虑使用继承的方式来实现你的指令
+
 # 消息构造器
 
 ## 链式调用构造消息
