@@ -259,6 +259,42 @@ fun main() {
 }
 ```
 
+# 会话
+
+> 在v2.8.2版本中引入了会话(Session)的API, 你可以轻松的创建一个对话而不用手写轮子，
+> 但是会话只能在使用继承`BaseCommand`创建的命令中使用下面是一个简单的例子，
+> 这里创建了一个群聊的测试指令: 在群聊中发送`/session 1`即可开始对话，
+> 后续如果输入的不是`2`则会一直重复输入期间不会触发其他的命令包括这个对话命令本身。
+
+```kotlin
+class TestSession : BaseCommand() {
+    override val commandNames = listOf("/session")
+
+    override suspend fun executeGroup(message: GroupMessage, args: List<String>) {
+        if (message.text.contains("1")) {
+            message.reply("继续输入")
+            // start表示开始对话
+            message.startSession()
+        }
+    }
+
+    override suspend fun onGroupSession(msg: GroupMessage) {
+        if (msg.text.contains("2")) {
+            // skip 表示结束对话
+            msg.skipSession()
+            msg.reply("设置成功")
+        } else {
+            // reject表示继续输入或者表示继续输入,
+            // 按照使用情景不同可以有不同的意思,
+            // 并附带一条消息
+            msg.reject(messageChain {
+                text("请输入2!")
+            })
+        }
+    }
+}
+```
+
 ## 注意
 
 > 这种方式使用到了反射来调用函数, 
