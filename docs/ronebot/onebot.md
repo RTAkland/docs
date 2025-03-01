@@ -266,8 +266,7 @@ fun main() {
 
 # 会话
 
-> 在v2.8.2版本中引入了会话(Session)的API, 你可以轻松的创建一个对话而不用手写轮子，
-> 但是会话只能在使用继承`BaseCommand`创建的命令中使用下面是一个简单的例子，
+> 在v2.8.2版本中引入了会话(Session)的API, 你可以轻松的创建一个对话而不用手写轮子，下面是一个简单的例子，
 > 这里创建了一个群聊的测试指令: 在群聊中发送`/session 1`即可开始对话，
 > 后续如果输入的不是`2`则会一直重复输入期间不会触发其他的命令包括这个对话命令本身。
 
@@ -299,6 +298,35 @@ class TestSession : BaseCommand() {
     }
 }
 ```
+
+## 函数式命令处理器会话
+
+```kotlin
+class TestReceiver {
+    @GroupSessionHandler
+    suspend fun testGroup(message: GroupMessage) {
+        println(message.action.getLoginInfo())
+        if (!message.text.contains("2")) {
+            rejectGroupSession(message, messageChain {
+                text("请输入2")
+            })
+        } else {
+            skipGroupSession(message)
+            message.reply("设置成功")
+        }
+    }
+}
+
+@GroupCommandHandler(["/test"], TestReceiver::class)
+suspend fun testCommand(message: GroupMessage) {
+    // ::testCommand 是获取自己的函数引用对象
+    startGroupSession(message, ::testCommand)
+    message.reply("请继续输入2")
+    println(message)
+}
+```
+
+> 唯一的弊端就是注解只能传入`Class`的引用, 没办法传入顶层函数所以想要使用必须创建一个类作为接收器
 
 # 消息构造器
 
