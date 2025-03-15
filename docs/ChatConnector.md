@@ -260,3 +260,12 @@
 ## 工作室官网购买
 
 https://studio.yhdzz.cn/shop/1843.html
+
+# 跑单🐕
+
+下面挂的是一些跑单的人:
+
+QQ: 2072086186 名称: Minecraft_Boy小号 
+![35c04373d19164ebe4d0df4a7ca8a0c0](https://github.com/user-attachments/assets/d488490d-cb39-4df8-a92a-cc3af41c93b1)
+
+> 给想跑单的人一些忠告，密钥我随时都可以吊销，实时验证没密钥你用不了的， 不要老想着搞些外门邪道的， 20块钱都拿不出来吗
